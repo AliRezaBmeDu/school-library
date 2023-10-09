@@ -1,8 +1,8 @@
 require_relative 'student'
 require_relative 'teacher'
 
-student1 = Student.new(12, 'Griffindor', 'Harry', 'yes')
-student2 = Student.new(18, 'Slitherin', 'Malfoy', 'no')
+student1 = Student.new(12, 'Griffindor', 'Harry', true)
+student2 = Student.new(18, 'Slitherin', 'Malfoy', false)
 
 teacher1 = Teacher.new(50, 'Defense', 'Lupin')
 teacher2 = Teacher.new(60, 'Deception', 'Snape')
