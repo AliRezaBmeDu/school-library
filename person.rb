@@ -17,7 +17,7 @@ class Person < Nameable
   end
 
   def correct_name
-    return name
+    name
   end
 
   private
@@ -25,5 +25,4 @@ class Person < Nameable
   def of_age?
     true if age >= 18
   end
-
 end
