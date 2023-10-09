@@ -90,8 +90,7 @@ https://github.com/firstpj/school-library.git
 To run the project, execute the following steps:
 
 ```sh
-  ruby student.rb
-  ruby teacher.rb
+  ruby test_file.rb
 ```
 
 
