@@ -74,7 +74,7 @@ In order to run this project you need:
 
 Clone this repository to your desired folder:
 
-https://github.com/firstpj/school-library.git
+https://github.com/AliRezaBmeDu/school-library.git
 
 ### Install
 
