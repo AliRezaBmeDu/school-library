@@ -17,5 +17,5 @@ classroom1.add_student(student3)
 classroom2.add_student(student1)
 classroom2.add_student(student4)
 
-# puts "#{student1.classroom}"
-puts classroom2.student_list
+puts "#{student1.name} belongs to #{student1.classroom}"
+puts "#{classroom2.label} has #{classroom2.student_list}"
