@@ -90,9 +90,8 @@ https://github.com/AliRezaBmeDu/school-library.git
 To run the project, execute the following steps:
 
 ```sh
-  ruby student.rb
-  ruby teacher.rb
-  ruby test_file.rb
+  ruby test_has_belongsto.rb
+  ruby test_many_to_many.rb
 ```
 
 
