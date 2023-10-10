@@ -4,7 +4,7 @@ require_relative 'trimmer_decorator'
 require_relative 'classroom'
 require_relative 'student'
 
-classroom1 =  Classroom.new('Math Class')
+classroom1 = Classroom.new('Math Class')
 classroom2 = Classroom.new('History Class')
 
 student1 = Student.new(10, 'Dawid')
@@ -19,5 +19,3 @@ classroom2.add_student(student4)
 
 # puts "#{student1.classroom}"
 puts classroom2.student_list
-
-
