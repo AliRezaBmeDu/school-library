@@ -1,13 +1,14 @@
 class Classroom
-    attr_accessor :label
+    attr_accessor :label, :student_group
 
     def initialize(label)
         @label = label
         @student_group = [] # this will contain the students
     end
 
-    def add_student
+    def add_student(student)
         @student_group << student # This will add a student objecgt to the students
+        student.classroom = label
     end
 
     def student_list
