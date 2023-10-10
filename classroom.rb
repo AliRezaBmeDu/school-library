@@ -8,7 +8,7 @@ class Classroom
 
   def add_student(student)
     @student_group << student # This will add a student objecgt to the students
-    student.classroom = label
+    student.classroom = self
   end
 
   def student_list
