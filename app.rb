@@ -34,7 +34,10 @@ class App
     age, name, type = create_person_inputs
     case type
     when 'Student'
-      person = Student.new(age, name)
+      print 'Has parent permission [Y/N]: '
+      parent_permission_input = gets.chomp.upcase
+      parent_permission = (parent_permission_input == 'Y')
+      person = Student.new(age, name, parent_permission: parent_permission)
     when 'Teacher'
       print 'Specialization: '
       specialization = gets.chomp
