@@ -15,14 +15,14 @@ class App
     print 'Do you want to create a student (1) or a teacher (2)? [Input the number]: '
     type_num = gets.chomp.to_i
     if type_num == 1
-        type = 'Student'
+      type = 'Student'
     elsif type_num == 2
-        type = 'Teacher'
+      type = 'Teacher'
     else
-        puts 'Invalid option'
-        return
+      puts 'Invalid option'
+      return
     end
-    print "Age: "
+    print 'Age: '
     age = gets.chomp.to_i
     print 'Name: '
     name = gets.chomp.capitalize
@@ -45,7 +45,7 @@ class App
     end
 
     @people << person
-    puts "Person created successfully"
+    puts 'Person created successfully'
   end
 
   def create_book
@@ -75,14 +75,14 @@ class App
   def create_rental
     puts 'Select a book from the following list by number'
     @booklist.each_with_index do |book, index|
-        puts "#{index}) Title: \"#{book.title}\", Author: #{book.author}"
-      end
+      puts "#{index}) Title: \"#{book.title}\", Author: #{book.author}"
+    end
     book_idx = gets.chomp.to_i
     book = @booklist[book_idx]
     puts 'Select a person from the following list by number (not id)'
     @people.each_with_index do |person, index|
-        puts "#{index}) [#{person.label}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
-      end
+      puts "#{index}) [#{person.label}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
+    end
     person_idx = gets.chomp.to_i
     person = @people[person_idx]
     date = Time.now
@@ -91,7 +91,7 @@ class App
 
     date_part = date.strftime('%Y/%m/%d')
     puts "Date: #{date_part}"
-    puts "Rental created successfully"
+    puts 'Rental created successfully'
   end
 
   def rental_list
@@ -102,7 +102,7 @@ class App
       puts 'The person is not in the list. Please press 2 and check the id of the people'
       return
     end
-    puts "Rentals: "
+    puts 'Rentals: '
     person.rentals.each do |rental|
       puts "Date: #{rental.date.strftime('%Y/%m/%d')}, Book '#{rental.book.title}' by #{rental.book.author}"
     end
