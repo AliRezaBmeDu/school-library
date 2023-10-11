@@ -66,4 +66,28 @@ class App
         end
     end
 
+    def create_rental
+        puts "Enter the name of the person"
+        name = gets.chomp
+        person = @people.find { |p| p.name == name }
+
+        if person.nil?
+            puts "#{name} is not in the list"
+            return
+        end
+
+        puts "Enter the name of the book being rented: "
+        book_name = gets.chomp
+        book = @booklist.find { |b| b.title == book_name }
+
+        if book.nil?
+            puts "#{book_name} is not in the booklist"
+            return
+        end
+        date = Time.now
+        rental = Rental.new(date, book, person)
+        @rentals << rental
+        puts "#{name} rented #{book_name} at #{date}"
+    end
+
 end
