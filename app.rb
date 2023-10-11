@@ -12,18 +12,20 @@ class App
   end
 
   def create_person_inputs
-    puts "Enter the person's age: "
+    print 'Do you want to create a student (1) or a teacher (2)? [Input the number]: '
+    type_num = gets.chomp.to_i
+    if type_num == 1
+        type = 'Student'
+    elsif type_num == 2
+        type = 'Teacher'
+    else
+        puts 'Invalid option'
+        return
+    end
+    print "Age: "
     age = gets.chomp.to_i
-    puts 'Enter the name of the person: '
-    name = gets.chomp.upcase
-    puts 'Enter the parent permission [Y/N]'
-    par_perm_input = gets.chomp.upcase
-    parent_permission = (par_perm_input == 'Y')
-    puts "parent_permission value is #{parent_permission}"
-    puts 'Is this person a Teacher or Student?'
-    puts 'S/s Student'
-    puts 'T/t Teacher'
-    type = gets.chomp.upcase
+    print 'Name: '
+    name = gets.chomp.capitalize
 
     [age, name, type]
   end
@@ -31,10 +33,10 @@ class App
   def create_person
     age, name, type = create_person_inputs
     case type
-    when 'S'
+    when 'Student'
       person = Student.new(age, name)
-    when 'T'
-      puts 'What is his/her specialization: '
+    when 'Teacher'
+      print 'Specialization: '
       specialization = gets.chomp
       person = Teacher.new(age, specialization, name)
     else
@@ -43,14 +45,14 @@ class App
     end
 
     @people << person
-    puts "person with name '#{person.name}' has been created with ID #{person.id}"
+    puts "Person created successfully"
   end
 
   def create_book
     puts 'Enter the book title: '
-    title = gets.chomp.upcase
+    title = gets.chomp.capitalize
     puts 'Enter the name of the author: '
-    author = gets.chomp.upcase
+    author = gets.chomp.capitalize
     book = Book.new(title, author)
     puts "Book '#{book.title}' by '#{book.author}' is added to the list"
     @booklist << book
@@ -59,39 +61,37 @@ class App
   def list_books
     puts 'List of Books: '
     @booklist.each do |book|
-      puts " '#{book.title}' written by '#{book.author}' "
+      puts "Title: \"#{book.title}\", Author: #{book.author}"
     end
   end
 
   def list_people
     puts 'List of People:'
     @people.each do |person|
-      puts "id: #{person.id}, name: #{person.name}, age: #{person.age}"
+      puts "[#{person.label}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
     end
   end
 
   def create_rental
-    puts 'Enter the name of the person'
-    name = gets.chomp.upcase
-    person = @people.find { |p| p.name == name }
-
-    if person.nil?
-      puts "#{name} is not in the list"
-      return
-    end
-
-    puts 'Enter the name of the book being rented: '
-    book_name = gets.chomp.upcase
-    book = @booklist.find { |b| b.title == book_name }
-
-    if book.nil?
-      puts "#{book_name} is not in the booklist"
-      return
-    end
+    puts 'Select a book from the following list by number'
+    @booklist.each_with_index do |book, index|
+        puts "#{index}) Title: \"#{book.title}\", Author: #{book.author}"
+      end
+    book_idx = gets.chomp.to_i
+    book = @booklist[book_idx]
+    puts 'Select a person from the following list by number (not id)'
+    @people.each_with_index do |person, index|
+        puts "#{index}) [#{person.label}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
+      end
+    person_idx = gets.chomp.to_i
+    person = @people[person_idx]
     date = Time.now
     rental = Rental.new(date, book, person)
     @rentals << rental
-    puts "#{name} rented #{book_name} at #{date}"
+
+    date_part = date.strftime('%Y/%m/%d')
+    puts "Date: #{date_part}"
+    puts "Rental created successfully"
   end
 
   def rental_list
