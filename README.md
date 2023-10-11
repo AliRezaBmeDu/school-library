@@ -24,7 +24,7 @@
 
 # 📖 School Library <a name="about-project"></a>
 
-**School Library** is a ruby written program to explore the object oriented programming. Here we will explore the creation of objects, the decorator, set up associations and adding the basic UI.
+**School Library** is a ruby written console application which delivers a detailed method to create different objects of a school library such as person, books, rental information. The primary purpose of the program is to explore the object oriented programming. Here we will explore the creation of objects, the decorator, set up associations and adding the basic UI.
 
 ## 🛠 Built With <a name="built-with"></a>
 
@@ -90,8 +90,7 @@ https://github.com/AliRezaBmeDu/school-library.git
 To run the project, execute the following steps:
 
 ```sh
-  ruby test_has_belongsto.rb
-  ruby test_many_to_many.rb
+  ruby main.rb
 ```
 
 
