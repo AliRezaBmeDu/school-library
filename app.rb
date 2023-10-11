@@ -16,7 +16,7 @@ class App
         puts "Enter the person's age: "
         age = gets.chomp.to_i
         puts "Enter the name of the person: "
-        name = gets.chomp
+        name = gets.chomp.upcase
         puts "Enter the parent permission [Y/N]"
         par_perm_input = gets.chomp.upcase
         parent_permission = (par_perm_input == 'Y')
@@ -44,9 +44,9 @@ class App
 
     def create_book
         puts "Enter the book title: "
-        title = gets.chomp.capitalize
+        title = gets.chomp.upcase
         puts "Enter the name of the author: "
-        author = gets.chomp.capitalize
+        author = gets.chomp.upcase
         book = Book.new(title, author)
         puts "Book '#{book.title}' by '#{book.author}' is added to the list"
         @booklist << book
@@ -68,7 +68,7 @@ class App
 
     def create_rental
         puts "Enter the name of the person"
-        name = gets.chomp
+        name = gets.chomp.upcase
         person = @people.find { |p| p.name == name }
 
         if person.nil?
@@ -77,7 +77,7 @@ class App
         end
 
         puts "Enter the name of the book being rented: "
-        book_name = gets.chomp
+        book_name = gets.chomp.upcase
         book = @booklist.find { |b| b.title == book_name }
 
         if book.nil?
@@ -95,7 +95,7 @@ class App
         id = gets.chomp.to_i
         person = @people.find { |p| p.id == id }
         if person == nil
-            puts "The person is not in the list"
+            puts "The person is not in the list. Please press 2 and check the id of the people"
             return
         end
         puts "The books '#{person.name}' rented are: "
