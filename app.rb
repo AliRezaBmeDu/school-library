@@ -52,4 +52,18 @@ class App
         @booklist << book
     end
 
+    def list_books
+        puts 'List of Books: '
+        @booklist.each do |book|
+            puts " '#{book.title}' written by '#{book.author}' "
+        end
+    end
+
+    def list_people
+        puts "List of People:"
+        @people.each do |person|
+            puts "id: #{person.id}, name: #{person.name}, age: #{person.age}"
+        end
+    end
+
 end
