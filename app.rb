@@ -95,17 +95,16 @@ class App
   end
 
   def rental_list
-    puts 'Enter the person ID: '
+    puts 'ID of person: '
     id = gets.chomp.to_i
     person = @people.find { |p| p.id == id }
     if person.nil?
       puts 'The person is not in the list. Please press 2 and check the id of the people'
       return
     end
-    puts "The books '#{person.name}' rented are: "
-    # puts "#{person.rentals}"
+    puts "Rentals: "
     person.rentals.each do |rental|
-      puts "Book '#{rental.book.title}' written by '#{rental.book.author}' was rented on #{rental.date}"
+      puts "Date: #{rental.date.strftime('%Y/%m/%d')}, Book '#{rental.book.title}' by #{rental.book.author}"
     end
   end
 
