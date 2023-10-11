@@ -14,36 +14,12 @@ end
 def main
   my_app = App.new
   puts "Welcome to the 'School Library' app. Please make your choice and press Enter"
+
   loop do
     display_main_menu
-
     choice = gets.chomp.to_i
-
-    case choice
-    when 1
-      my_app.list_books
-
-    when 2
-      my_app.list_people
-
-    when 3
-      my_app.create_person
-
-    when 4
-      my_app.create_book
-
-    when 5
-      my_app.create_rental
-
-    when 6
-      my_app.rental_list
-
-    when 7
-      puts 'Exiting... Thank you for using the app'
-      break
-    else
-      puts 'Invalid choce. Please enter a valid option'
-    end
+    my_app.handle_choice(choice)
+    break if choice == 7
   end
 end
 

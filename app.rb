@@ -108,4 +108,40 @@ class App
       puts "Book '#{rental.book.title}' written by '#{rental.book.author}' was rented on #{rental.date}"
     end
   end
+
+  def handle_choice(choice)
+    if choice <= 4
+      handle_choice_section1(choice)
+    else
+      handle_choice_section2(choice)
+    end
+  end
+
+  def handle_choice_section1(choice)
+    case choice
+    when 1
+      list_books
+    when 2
+      list_people
+    when 3
+      create_person
+    when 4
+      create_book
+    else
+      puts 'Invalid choice in section 1. Please enter a valid option'
+    end
+  end
+
+  def handle_choice_section2(choice)
+    case choice
+    when 5
+      create_rental
+    when 6
+      rental_list
+    when 7
+      puts 'Exiting... Thank you for using the app'
+    else
+      puts 'Invalid choice in section 2. Please enter a valid option'
+    end
+  end
 end
