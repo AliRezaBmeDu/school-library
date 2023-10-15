@@ -141,7 +141,7 @@ class App
     when 4
       create_book
     else
-      puts 'Invalid choice in section 1. Please enter a valid option'
+      puts 'Invalid choice. Please enter a valid option'
     end
   end
 
@@ -154,7 +154,7 @@ class App
     when 7
       puts 'Exiting... Thank you for using the app'
     else
-      puts 'Invalid choice in section 2. Please enter a valid option'
+      puts 'Invalid choice. Please enter a valid option'
     end
   end
 end
