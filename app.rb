@@ -64,19 +64,19 @@ class App
 
   def list_books
     puts 'List of Books: '
-    if @booklist
-      @booklist.each do |book|
-        puts "Title: \"#{book.title}\", Author: #{book.author}"
-      end
+    return unless @booklist
+
+    @booklist.each do |book|
+      puts "Title: \"#{book.title}\", Author: #{book.author}"
     end
   end
 
   def list_people
     puts 'List of People:'
-    if @people
-      @people.each do |person|
-        puts "[#{person.label}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
-      end
+    return unless @people
+
+    @people.each do |person|
+      puts "[#{person.label}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
     end
   end
 
