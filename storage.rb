@@ -18,4 +18,16 @@ module Storage
     end
     open('./datastorage/people.json', 'w') { |f| f.write JSON.generate(people_data) }
   end
+
+  def store_books
+    book_data = []
+    @booklist.each do |book|
+      book_json = {
+        title: book.title,
+        author: book.author
+      }
+      book_data << book_json
+    end
+    open('./datastorage/books.json', 'w') { |f| f << JSON.generate(book_data) }
+  end
 end

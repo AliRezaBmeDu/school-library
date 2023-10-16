@@ -40,6 +40,7 @@ def main
     puts "\n"
   end
   my_app.store_people
+  my_app.store_books
 end
 
 main
