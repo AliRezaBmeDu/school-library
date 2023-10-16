@@ -3,7 +3,7 @@ require_relative 'person'
 require_relative 'student'
 require_relative 'teacher'
 require_relative 'rental'
-require 'json'
+require_relative 'storage'
 
 class App
   def initialize
@@ -112,37 +112,6 @@ class App
     end
   end
 
-  def store_data
-    books_hash = {}
-    people_hash = {}
-    rentals_hash = {}
-
-    @booklist.each_with_index do |book, index|
-      books_hash["book#{index}"] = book
-    end
-
-    @people.each_with_index do |person, index|
-      people_hash["person#{index}"] = person
-    end
-    
-    @rentals.each_with_index do |rental, index|
-      rentals_hash["rental#{index}"] = rental
-    end
-
-    json_books = books_hash.to_json
-    json_people = people_hash.to_json
-    json_rentals = rentals_hash.to_json
-    File.open('./datastorage/book.json', 'w') do |file|
-      file.write(json_books)
-    end
-    File.open('./datastorage/people.json', 'w') do |file|
-      file.write(json_people)
-    end
-    File.open('./datastorage/rental.json', 'w') do |file|
-      file.write(json_rentals)
-    end
-  end
-
   def display_main_menu
     puts "\nMain Menu: "
     puts '1. List all books'
@@ -184,7 +153,7 @@ class App
     when 6
       rental_list
     when 7
-      store_data
+      Storage.new(@booklist, @people, @rentals).store_data
       puts 'Exiting... Thank you for using the app'
     else
       puts 'Invalid choice. Please enter a valid option'

@@ -1,26 +1,37 @@
 require 'json'
 
-# class Storage
-#     attr_accessor
-#     def store_data
-#     end
-#     def extract_data
-#     end
-# end
+class Storage
+  attr_accessor :books_hash, :people_hash, :rentals_hash, :json_books, :json_people, :json_rentals
 
-data_hash = {
-    'books' => []
-}
+  def initialize(booklist, people, rentals)
+    @booklist = booklist
+    @people = people
+    @rentals = rentals
+    @books_hash = {}
+    @people_hash = {}
+    @rentals_hash = {}
+  end
 
-data_hash['books'].push('I, Robot')
-data_hash['books'][1] = 'The Caves of Steel2'
+  def store_data
+    @booklist.each_with_index do |book, index|
+      @books_hash["book#{index}"] = book
+    end
 
-File.write('./datastorage/sample-data.json', JSON.dump(data_hash))
-if File.exist?("./datastorage/sample-data.json")
- file = File.read('./datastorage/sample-data.json')
- data_output = JSON.parse(file)
-else
-    data_output = nil
+    @people.each_with_index do |person, index|
+      @people_hash["person#{index}"] = person
+    end
+
+    @rentals.each_with_index do |rental, index|
+      @rentals_hash["rental#{index}"] = rental
+    end
+
+    @json_books = @books_hash.to_json
+    @json_people = @people_hash.to_json
+    @json_rentals = @rentals_hash.to_json
+    File.write('./datastorage/book.json', @json_books)
+    File.write('./datastorage/people.json', @json_people)
+    File.write('./datastorage/rental.json', @json_rentals)
+  end
+
+  def extract_data; end
 end
-puts File.exist?("./datastorage/sample-data.json")
-puts data_output
