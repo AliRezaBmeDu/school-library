@@ -1,11 +1,11 @@
 require_relative 'app'
-require_relative 'storage'
+# require_relative 'storage'
 
 def main
   my_app = App.new
-  my_storage = Storage.new
+  # my_storage = Storage.new
+  # my_storage.extract_data
   puts "Welcome to the 'School Library' app. Please make your choice and press Enter"
-  my_storage.extract_data
 
   loop do
     my_app.display_main_menu

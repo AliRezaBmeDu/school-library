@@ -3,6 +3,7 @@ require_relative 'person'
 require_relative 'student'
 require_relative 'teacher'
 require_relative 'rental'
+require 'json'
 
 class App
   def initialize
@@ -111,6 +112,17 @@ class App
     end
   end
 
+  def store_data
+    books = {}
+    @booklist.each_with_index do |book, index|
+      books["book#{index}"] = book
+    end
+    json_data = books.to_json
+    File.open('./datastorage/book.json', 'w') do |file|
+      file.write(json_data)
+    end
+  end
+
   def display_main_menu
     puts "\nMain Menu: "
     puts '1. List all books'
@@ -152,6 +164,7 @@ class App
     when 6
       rental_list
     when 7
+      store_data
       puts 'Exiting... Thank you for using the app'
     else
       puts 'Invalid choice. Please enter a valid option'
