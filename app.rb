@@ -113,13 +113,33 @@ class App
   end
 
   def store_data
-    books = {}
+    books_hash = {}
+    people_hash = {}
+    rentals_hash = {}
+
     @booklist.each_with_index do |book, index|
-      books["book#{index}"] = book
+      books_hash["book#{index}"] = book
     end
-    json_data = books.to_json
+
+    @people.each_with_index do |person, index|
+      people_hash["person#{index}"] = person
+    end
+    
+    @rentals.each_with_index do |rental, index|
+      rentals_hash["rental#{index}"] = rental
+    end
+
+    json_books = books_hash.to_json
+    json_people = people_hash.to_json
+    json_rentals = rentals_hash.to_json
     File.open('./datastorage/book.json', 'w') do |file|
-      file.write(json_data)
+      file.write(json_books)
+    end
+    File.open('./datastorage/people.json', 'w') do |file|
+      file.write(json_people)
+    end
+    File.open('./datastorage/rental.json', 'w') do |file|
+      file.write(json_rentals)
     end
   end
 
