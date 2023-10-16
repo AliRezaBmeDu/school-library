@@ -38,7 +38,7 @@ module Storage
     @rentals.each do |rental|
       rental_json = {
         date: rental.date,
-        personId: rental.person.id,
+        person_id: rental.person.id,
         bookTitle: rental.book.title
       }
       rental_data << rental_json
@@ -46,34 +46,57 @@ module Storage
     open('./datastorage/rental.json', 'w') { |f| f << JSON.generate(rental_data) }
   end
 
-  def load_data_startup
-    books, people, rentals = [], [], []
+  def load_booklist
+    booklist = []
     book_file = './datastorage/books.json'
-    people_file = './datastorage/people.json'
-    rental_file = './datastorage/rental.json'
     if File.exist? book_file
       json_file = File.read(book_file)
       json_books = JSON.parse(json_file)
-      json_books.each do |bookItem|
-        books.push(Book.new(bookItem['title'], bookItem['author']))
+      puts json_books
+      json_books.each do |book_item|
+        booklist.push(Book.new(book_item['title'], book_item['author']))
       end
     end
+    booklist
+  end
+
+  def load_people
+    people = []
+    people_file = './datastorage/people.json'
     if File.exist? people_file
       json_file = File.read(people_file)
       json_people = JSON.parse(json_file)
       json_people.each do |person|
-        people.push(Teacher.new(person['age'], person['specialization'], person['name'], id: person['id'])) if person['label'] == 'Teacher'
-        people.push(Student.new(person['age'], person['name'], parent_permission: person['parent_permission'], id: person['id'])) if person['label'] == 'Student'
+        if person['label'] == 'Teacher'
+          people.push(Teacher.new(person['age'], person['specialization'], person['name'],
+                                  id: person['id']))
+        end
+        if person['label'] == 'Student'
+          people.push(Student.new(person['age'], person['name'], parent_permission: person['parent_permission'],
+                                                                 id: person['id']))
+        end
       end
     end
+    people
+  end
+
+  def load_rentals
+    rentals = []
+    rental_file = './datastorage/rental.json'
     if File.exist? rental_file
       json_rental = JSON.parse(File.read(rental_file))
       json_rental.each do |rental|
-        person = people.find { |person| person.id == rental.personId }
-        book = books.find { |book| book.title == rental.bookTitle }
-        rentals.push(Rental.new(rental.date, book, person))
+        person_rent = @people.find { |person| person.id == rental.person_id }
+        rented_book = @books.find { |book| book.title == rental.bookTitle }
+        rentals.push(Rental.new(rental.date, rented_book, person_rent))
       end
     end
-    return [books, people, rentals]
+    rentals
+  end
+
+  def load_data_startup
+    @booklist = load_booklist
+    @people = load_people
+    @rentals = load_rentals
   end
 end

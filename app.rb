@@ -8,10 +8,8 @@ require_relative 'storage'
 class App
   include Storage
   def initialize
-    @booklist, @people, @rentals = load_data_startup
-    # @booklist = []
-    # @people = []
-    # @rentals = []
+    load_data_startup
+    puts "booklist #{@booklist}"
   end
 
   def create_person_inputs
@@ -66,15 +64,19 @@ class App
 
   def list_books
     puts 'List of Books: '
-    @booklist.each do |book|
-      puts "Title: \"#{book.title}\", Author: #{book.author}"
+    if @booklist
+      @booklist.each do |book|
+        puts "Title: \"#{book.title}\", Author: #{book.author}"
+      end
     end
   end
 
   def list_people
     puts 'List of People:'
-    @people.each do |person|
-      puts "[#{person.label}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
+    if @people
+      @people.each do |person|
+        puts "[#{person.label}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
+      end
     end
   end
 
