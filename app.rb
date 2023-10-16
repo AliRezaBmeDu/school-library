@@ -7,9 +7,10 @@ require_relative 'storage'
 
 class App
   def initialize
+    # @booklist, @people, @rental = Storage.new([],[],[]).extract_data
     @booklist = []
-    @rentals = []
     @people = []
+    @rental = []
   end
 
   def create_person_inputs
@@ -112,51 +113,7 @@ class App
     end
   end
 
-  def display_main_menu
-    puts "\nMain Menu: "
-    puts '1. List all books'
-    puts '2. List all people'
-    puts '3. Create a person'
-    puts '4. Create a book'
-    puts '5. Rent a book'
-    puts '6. List the rentals for a person'
-    puts '7. Exit'
-  end
-
-  def handle_choice(choice)
-    if choice <= 4
-      handle_choice_section1(choice)
-    else
-      handle_choice_section2(choice)
-    end
-  end
-
-  def handle_choice_section1(choice)
-    case choice
-    when 1
-      list_books
-    when 2
-      list_people
-    when 3
-      create_person
-    when 4
-      create_book
-    else
-      puts 'Invalid choice. Please enter a valid option'
-    end
-  end
-
-  def handle_choice_section2(choice)
-    case choice
-    when 5
-      create_rental
-    when 6
-      rental_list
-    when 7
-      Storage.new(@booklist, @people, @rentals).store_data
-      puts 'Exiting... Thank you for using the app'
-    else
-      puts 'Invalid choice. Please enter a valid option'
-    end
+  def invalid_option
+    puts 'Invalid option'
   end
 end

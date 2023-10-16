@@ -1,4 +1,7 @@
 require 'json'
+require_relative 'student'
+require_relative 'teacher'
+require_relative 'book'
 
 class Storage
   attr_accessor :books_hash, :people_hash, :rentals_hash, :json_books, :json_people, :booklist, :people, :rentals
@@ -49,10 +52,10 @@ class Storage
       data_hash = JSON.parse(file)
       @rentals = data_hash.values
     end
-    
+
     puts @booklist
     puts @people
     puts @rentals
-    return [@booklist, @people, @rentals]
+    [@booklist, @people, @rentals]
   end
 end
