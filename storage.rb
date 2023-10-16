@@ -50,6 +50,7 @@ module Storage
     books, people, rentals = [], [], []
     book_file = './datastorage/books.json'
     people_file = './datastorage/people.json'
+    rental_file = './datastorage/rental.json'
     if File.exist? book_file
       json_file = File.read(book_file)
       json_books = JSON.parse(json_file)
@@ -60,10 +61,19 @@ module Storage
     if File.exist? people_file
       json_file = File.read(people_file)
       json_people = JSON.parse(json_file)
-      json_books.each do |person|
-        people.push(Teacher.new(person['age'], person['specialization'], person['name'])) if person['label'] == 'Teacher'
-        people.push(Student.new(person['age'], person['name'], parent_permission: person['parent_permission'])) if person['label'] == 'Student'
+      json_people.each do |person|
+        people.push(Teacher.new(person['age'], person['specialization'], person['name'], id: person['id'])) if person['label'] == 'Teacher'
+        people.push(Student.new(person['age'], person['name'], parent_permission: person['parent_permission'], id: person['id'])) if person['label'] == 'Student'
       end
     end
+    if File.exist? rental_file
+      json_rental = JSON.parse(File.read(rental_file))
+      json_rental.each do |rental|
+        person = people.find { |person| person.id == rental.personId }
+        book = books.find { |book| book.title == rental.bookTitle }
+        rentals.push(Rental.new(rental.date, book, person))
+      end
+    end
+    return [books, people, rentals]
   end
 end

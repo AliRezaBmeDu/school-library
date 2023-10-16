@@ -8,10 +8,10 @@ require_relative 'storage'
 class App
   include Storage
   def initialize
-    # @booklist, @people, @rental = Storage.new([],[],[]).extract_data
-    @booklist = []
-    @people = []
-    @rentals = []
+    @booklist, @people, @rentals = load_data_startup
+    # @booklist = []
+    # @people = []
+    # @rentals = []
   end
 
   def create_person_inputs
