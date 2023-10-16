@@ -6,6 +6,7 @@ require_relative 'rental'
 require_relative 'storage'
 
 class App
+  include Storage
   def initialize
     # @booklist, @people, @rental = Storage.new([],[],[]).extract_data
     @booklist = []

@@ -3,59 +3,33 @@ require_relative 'student'
 require_relative 'teacher'
 require_relative 'book'
 
-class Storage
-  attr_accessor :books_hash, :people_hash, :rentals_hash, :json_books, :json_people, :booklist, :people, :rentals
-
-  def initialize(booklist, people, rentals)
-    @booklist = booklist
-    @people = people
-    @rentals = rentals
-    @books_hash = {}
-    @people_hash = {}
-    @rentals_hash = {}
-  end
-
-  def store_data
-    @booklist.each_with_index do |book, index|
-      @books_hash["book#{index}"] = book
-    end
-
+module Storage
+  def store_people
+    data = []
     @people.each_with_index do |person, index|
-      @people_hash["person#{index}"] = person
-    end
+      person_json = case person
+        when Teacher
+          {
+            label: 'Teacher', 
+            id: person.id, 
+            age: person.age, 
+            name: person.name,
+            specialization: person.specialization
+          }
+        when Student
+          {
+            label: 'Student', 
+            id: person.id, 
+            age: person.age, 
+            name: person.name
+          }
+        else
+          puts "Unknown person type"
+          {}
+      end
 
-    @rentals.each_with_index do |rental, index|
-      @rentals_hash["rental#{index}"] = rental
+      data << person_json
     end
-
-    @json_books = @books_hash.to_json
-    @json_people = @people_hash.to_json
-    @json_rentals = @rentals_hash.to_json
-    File.write('./datastorage/book.json', @json_books)
-    File.write('./datastorage/people.json', @json_people)
-    File.write('./datastorage/rental.json', @json_rentals)
-  end
-
-  def extract_data
-    if File.exist?('./datastorage/book.json')
-      file = File.read('./datastorage/book.json')
-      data_hash = JSON.parse(file)
-      @booklist = data_hash.values
-    end
-    if File.exist?('./datastorage/people.json')
-      file = File.read('./datastorage/people.json')
-      data_hash = JSON.parse(file)
-      @people = data_hash.values
-    end
-    if File.exist?('./datastorage/rental.json')
-      file = File.read('./datastorage/rental.json')
-      data_hash = JSON.parse(file)
-      @rentals = data_hash.values
-    end
-
-    puts @booklist
-    puts @people
-    puts @rentals
-    [@booklist, @people, @rentals]
+    open('./datastorage/people.json', 'w') { |f| f.write JSON.generate(data) }
   end
 end

@@ -39,6 +39,7 @@ def main
     my_app.send(selection)
     puts "\n"
   end
+  my_app.store_people
 end
 
 main
