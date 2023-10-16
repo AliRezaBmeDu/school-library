@@ -1,7 +1,7 @@
 require 'json'
 
 class Storage
-  attr_accessor :books_hash, :people_hash, :rentals_hash, :json_books, :json_people, :json_rentals
+  attr_accessor :books_hash, :people_hash, :rentals_hash, :json_books, :json_people, :booklist, :people, :rentals
 
   def initialize(booklist, people, rentals)
     @booklist = booklist
@@ -33,5 +33,26 @@ class Storage
     File.write('./datastorage/rental.json', @json_rentals)
   end
 
-  def extract_data; end
+  def extract_data
+    if File.exist?('./datastorage/book.json')
+      file = File.read('./datastorage/book.json')
+      data_hash = JSON.parse(file)
+      @booklist = data_hash.values
+    end
+    if File.exist?('./datastorage/people.json')
+      file = File.read('./datastorage/people.json')
+      data_hash = JSON.parse(file)
+      @people = data_hash.values
+    end
+    if File.exist?('./datastorage/rental.json')
+      file = File.read('./datastorage/rental.json')
+      data_hash = JSON.parse(file)
+      @rentals = data_hash.values
+    end
+    
+    puts @booklist
+    puts @people
+    puts @rentals
+    return [@booklist, @people, @rentals]
+  end
 end
