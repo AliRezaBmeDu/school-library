@@ -11,7 +11,7 @@ class App
     # @booklist, @people, @rental = Storage.new([],[],[]).extract_data
     @booklist = []
     @people = []
-    @rental = []
+    @rentals = []
   end
 
   def create_person_inputs
@@ -93,6 +93,7 @@ class App
     person = @people[person_idx]
     date = Time.now
     rental = Rental.new(date, book, person)
+    puts rental
     @rentals << rental
 
     date_part = date.strftime('%Y/%m/%d')

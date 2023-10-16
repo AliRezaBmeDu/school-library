@@ -41,6 +41,7 @@ def main
   end
   my_app.store_people
   my_app.store_books
+  my_app.store_rentals
 end
 
 main

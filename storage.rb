@@ -2,6 +2,7 @@ require 'json'
 require_relative 'student'
 require_relative 'teacher'
 require_relative 'book'
+require_relative 'rental'
 
 module Storage
   def store_people
@@ -29,5 +30,18 @@ module Storage
       book_data << book_json
     end
     open('./datastorage/books.json', 'w') { |f| f << JSON.generate(book_data) }
+  end
+
+  def store_rentals
+    rental_data = []
+    @rentals.each do |rental|
+      rental_json = {
+        date: rental.date,
+        personId: rental.person.id,
+        bookTitle: rental.book.title
+      }
+      rental_data << rental_json
+    end
+    open('./datastorage/rental.json', 'w') { |f| f << JSON.generate(rental_data) }
   end
 end
