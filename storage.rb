@@ -15,6 +15,7 @@ module Storage
         label: person.label
       }
       person_json['specialization'] = person.specialization if person.label == 'Teacher'
+      person_json['parent_permission'] = person.parent_permission if person.label == 'Student'
       people_data << person_json
     end
     open('./datastorage/people.json', 'w') { |f| f.write JSON.generate(people_data) }
@@ -43,5 +44,26 @@ module Storage
       rental_data << rental_json
     end
     open('./datastorage/rental.json', 'w') { |f| f << JSON.generate(rental_data) }
+  end
+
+  def load_data_startup
+    books, people, rentals = [], [], []
+    book_file = './datastorage/books.json'
+    people_file = './datastorage/people.json'
+    if File.exist? book_file
+      json_file = File.read(book_file)
+      json_books = JSON.parse(json_file)
+      json_books.each do |bookItem|
+        books.push(Book.new(bookItem['title'], bookItem['author']))
+      end
+    end
+    if File.exist? people_file
+      json_file = File.read(people_file)
+      json_people = JSON.parse(json_file)
+      json_books.each do |person|
+        people.push(Teacher.new(person['age'], person['specialization'], person['name'])) if person['label'] == 'Teacher'
+        people.push(Student.new(person['age'], person['name'], parent_permission: person['parent_permission'])) if person['label'] == 'Student'
+      end
+    end
   end
 end
