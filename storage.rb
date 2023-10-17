@@ -52,7 +52,6 @@ module Storage
     if File.exist? book_file
       json_file = File.read(book_file)
       json_books = JSON.parse(json_file)
-      puts json_books
       json_books.each do |book_item|
         booklist.push(Book.new(book_item['title'], book_item['author']))
       end
@@ -86,8 +85,8 @@ module Storage
     if File.exist? rental_file
       json_rental = JSON.parse(File.read(rental_file))
       json_rental.each do |rental|
-        person_rent = @people.find { |person| person.id == rental['person_id']}
-        rented_book = @booklist.find { |book| book.title == rental['bookTitle']}
+        person_rent = @people.find { |person| person.id == rental['person_id'] }
+        rented_book = @booklist.find { |book| book.title == rental['bookTitle'] }
         rentals.push(Rental.new(rental['date'], rented_book, person_rent))
       end
     end
