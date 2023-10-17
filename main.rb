@@ -23,7 +23,7 @@ end
 
 def main
   my_app = App.new
-  puts "Welcome to the 'School Library' app. Please make your choice and press Enter"
+  puts "\n\nWelcome to the 'School Library' app. Please make your choice and press Enter"
   loop do
     display_main_menu
     print 'input: '

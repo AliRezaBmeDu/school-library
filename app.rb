@@ -9,7 +9,6 @@ class App
   include Storage
   def initialize
     load_data_startup
-    puts "booklist #{@booklist}"
   end
 
   def store_all_data
