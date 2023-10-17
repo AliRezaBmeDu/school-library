@@ -41,7 +41,8 @@ RSpec.describe Person do
   describe "#add_rental" do
     it "adds a rental to the rentals array" do
       person = Person.new(18)
-      rental = double("Rental")
+      book = Book.new("Hamlet", "Shakespeare")
+      rental = Rental.new('10/18/2023', book, person)
       person.add_rental(rental)
       expect(person.rentals).to include(rental)
     end
@@ -49,8 +50,8 @@ RSpec.describe Person do
 
   describe "#correct_name" do
     it "returns the person's name" do
-      person = Person.new(30, 'Alice Johnson')
-      expect(person.correct_name).to eq('Alice Johnson')
+      person = Person.new(30, 'Harry Potter')
+      expect(person.correct_name).to eq('Harry Potter')
     end
   end
 end
