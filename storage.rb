@@ -94,9 +94,5 @@ module Storage
     rentals
   end
 
-  def load_data_startup
-    @booklist = load_booklist
-    @people = load_people
-    @rentals = load_rentals
-  end
+
 end
