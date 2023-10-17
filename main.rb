@@ -23,8 +23,6 @@ end
 
 def main
   my_app = App.new
-  # my_storage = Storage.new
-  # my_storage.extract_data
   puts "Welcome to the 'School Library' app. Please make your choice and press Enter"
   loop do
     display_main_menu
