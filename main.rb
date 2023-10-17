@@ -1,5 +1,4 @@
 require_relative 'app'
-# require_relative 'storage'
 
 TASKS = {
   1 => :list_books,
@@ -39,9 +38,7 @@ def main
     my_app.send(selection)
     puts "\n"
   end
-  my_app.store_people
-  my_app.store_books
-  my_app.store_rentals
+my_app.store_all_data
 end
 
 main
