@@ -1,5 +1,15 @@
 require_relative 'app'
 
+TASKS = {
+  1 => :list_books,
+  2 => :list_people,
+  3 => :create_person,
+  4 => :create_book,
+  5 => :create_rental,
+  6 => :rental_list,
+  default: :invalid_option
+}.freeze
+
 def display_main_menu
   puts "\nMain Menu: "
   puts '1. List all books'
@@ -13,14 +23,20 @@ end
 
 def main
   my_app = App.new
-  puts "Welcome to the 'School Library' app. Please make your choice and press Enter"
-
+  puts "\n\nWelcome to the 'School Library' app. Please make your choice and press Enter"
   loop do
     display_main_menu
-    choice = gets.chomp.to_i
-    my_app.handle_choice(choice)
-    break if choice == 7
+    print 'input: '
+    option = gets.chomp.to_i
+    if option == 7
+      puts 'Exiting... Thank you for using the application'
+      break
+    end
+    selection = TASKS[option] || TASKS[:default]
+    my_app.send(selection)
+    puts "\n"
   end
+  my_app.store_all_data
 end
 
 main

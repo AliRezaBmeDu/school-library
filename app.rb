@@ -3,12 +3,18 @@ require_relative 'person'
 require_relative 'student'
 require_relative 'teacher'
 require_relative 'rental'
+require_relative 'storage'
 
 class App
+  include Storage
   def initialize
-    @booklist = []
-    @rentals = []
-    @people = []
+    load_data_startup
+  end
+
+  def store_all_data
+    store_people
+    store_books
+    store_rentals
   end
 
   def create_person_inputs
@@ -63,6 +69,8 @@ class App
 
   def list_books
     puts 'List of Books: '
+    return unless @booklist
+
     @booklist.each do |book|
       puts "Title: \"#{book.title}\", Author: #{book.author}"
     end
@@ -70,6 +78,8 @@ class App
 
   def list_people
     puts 'List of People:'
+    return unless @people
+
     @people.each do |person|
       puts "[#{person.label}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
     end
@@ -88,12 +98,11 @@ class App
     end
     person_idx = gets.chomp.to_i
     person = @people[person_idx]
-    date = Time.now
+    current_time = Time.now
+    date = current_time.strftime('%Y/%m/%d')
     rental = Rental.new(date, book, person)
     @rentals << rental
-
-    date_part = date.strftime('%Y/%m/%d')
-    puts "Date: #{date_part}"
+    puts "Date: #{date}"
     puts 'Rental created successfully'
   end
 
@@ -107,43 +116,11 @@ class App
     end
     puts 'Rentals: '
     person.rentals.each do |rental|
-      puts "Date: #{rental.date.strftime('%Y/%m/%d')}, Book '#{rental.book.title}' by #{rental.book.author}"
+      puts "Date: #{rental.date}, Book '#{rental.book.title}' by #{rental.book.author}"
     end
   end
 
-  def handle_choice(choice)
-    if choice <= 4
-      handle_choice_section1(choice)
-    else
-      handle_choice_section2(choice)
-    end
-  end
-
-  def handle_choice_section1(choice)
-    case choice
-    when 1
-      list_books
-    when 2
-      list_people
-    when 3
-      create_person
-    when 4
-      create_book
-    else
-      puts 'Invalid choice in section 1. Please enter a valid option'
-    end
-  end
-
-  def handle_choice_section2(choice)
-    case choice
-    when 5
-      create_rental
-    when 6
-      rental_list
-    when 7
-      puts 'Exiting... Thank you for using the app'
-    else
-      puts 'Invalid choice in section 2. Please enter a valid option'
-    end
+  def invalid_option
+    puts 'Invalid option'
   end
 end
