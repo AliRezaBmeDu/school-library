@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 RSpec.describe Student do
-  describe "#initialize" do
-    it "creates a new Student with default values" do
+  describe '#initialize' do
+    it 'creates a new Student with default values' do
       student = Student.new(15)
       expect(student.name).to eq('Unknown')
       expect(student.age).to eq(15)
@@ -12,7 +12,7 @@ RSpec.describe Student do
       expect(student.label).to eq('Student')
     end
 
-    it "creates a new Student with custom values" do
+    it 'creates a new Student with custom values' do
       student = Student.new(16, 'Harry', parent_permission: false, id: 123)
       expect(student.name).to eq('Harry')
       expect(student.age).to eq(16)
@@ -21,8 +21,8 @@ RSpec.describe Student do
     end
   end
 
-  describe "#assign_classroom" do
-    it "assigns a classroom to the student" do
+  describe '#assign_classroom' do
+    it 'assigns a classroom to the student' do
       student = Student.new(17, 'Gary')
       classroom = Classroom.new('Math')
       student.assign_classroom(classroom)
@@ -31,7 +31,7 @@ RSpec.describe Student do
     end
   end
 
-  describe "#play_hooky" do
+  describe '#play_hooky' do
     it "returns '¯(ツ)/¯'" do
       student = Student.new(14, 'Bob')
       expect(student.play_hooky).to eq('¯(ツ)/¯')
