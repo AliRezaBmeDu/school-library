@@ -86,9 +86,9 @@ module Storage
     if File.exist? rental_file
       json_rental = JSON.parse(File.read(rental_file))
       json_rental.each do |rental|
-        person_rent = @people.find { |person| person.id == rental.person_id }
-        rented_book = @books.find { |book| book.title == rental.bookTitle }
-        rentals.push(Rental.new(rental.date, rented_book, person_rent))
+        person_rent = @people.find { |person| person.id == rental['person_id']}
+        rented_book = @booklist.find { |book| book.title == rental['bookTitle']}
+        rentals.push(Rental.new(rental['date'], rented_book, person_rent))
       end
     end
     rentals

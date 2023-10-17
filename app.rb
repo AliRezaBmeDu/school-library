@@ -18,7 +18,6 @@ class App
     store_rentals
   end
 
-
   def create_person_inputs
     print 'Do you want to create a student (1) or a teacher (2)? [Input the number]: '
     type_num = gets.chomp.to_i

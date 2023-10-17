@@ -6,7 +6,7 @@ TASKS = {
   3 => :create_person,
   4 => :create_book,
   5 => :create_rental,
-  6 => :list_rental,
+  6 => :rental_list,
   default: :invalid_option
 }.freeze
 
@@ -36,7 +36,7 @@ def main
     my_app.send(selection)
     puts "\n"
   end
-my_app.store_all_data
+  my_app.store_all_data
 end
 
 main
