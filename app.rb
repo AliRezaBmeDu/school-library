@@ -99,13 +99,11 @@ class App
     end
     person_idx = gets.chomp.to_i
     person = @people[person_idx]
-    date = Time.now
+    current_time = Time.now
+    date = current_time.strftime('%Y/%m/%d')
     rental = Rental.new(date, book, person)
-    puts rental
     @rentals << rental
-
-    date_part = date.strftime('%Y/%m/%d')
-    puts "Date: #{date_part}"
+    puts "Date: #{date}"
     puts 'Rental created successfully'
   end
 
@@ -119,7 +117,7 @@ class App
     end
     puts 'Rentals: '
     person.rentals.each do |rental|
-      puts "Date: #{rental.date.strftime('%Y/%m/%d')}, Book '#{rental.book.title}' by #{rental.book.author}"
+      puts "Date: #{rental.date}, Book '#{rental.book.title}' by #{rental.book.author}"
     end
   end
 
