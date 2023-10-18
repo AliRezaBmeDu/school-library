@@ -3,10 +3,10 @@ require 'spec_helper'
 RSpec.describe Teacher do
   describe '#initialize' do
     it 'creates a new Teacher with default values' do
-      teacher = Teacher.new(35, 'Math')
+      teacher = Teacher.new(35, 'English')
       expect(teacher.name).to eq('Unknown')
       expect(teacher.age).to eq(35)
-      expect(teacher.specialization).to eq('Math')
+      expect(teacher.specialization).to eq('English')
       expect(teacher.id).to be_a(Integer)
       expect(teacher.label).to eq('Teacher')
     end
