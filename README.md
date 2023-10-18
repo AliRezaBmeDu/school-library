@@ -58,6 +58,7 @@
 - **DRY method**
 - **Methods for the class Person, Student and Teacher**
 - **Add Storage feature**
+- **Unit Test**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
