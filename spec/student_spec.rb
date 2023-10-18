@@ -13,7 +13,7 @@ RSpec.describe Student do
     end
 
     it 'creates a new Student with custom values' do
-      student = Student.new(20, 'Ali', parent_permission: false, id: 123)
+      student = Student.new(16, 'Harry', parent_permission: false, id: 123)
       expect(student.name).to eq('Harry')
       expect(student.age).to eq(16)
       expect(student.parent_permission).to eq(false)
